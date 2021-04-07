@@ -7,14 +7,26 @@ const NavBar=()=>{
     const [state,dispatch]=useReducer(reducer,initialState)
     const history=useHistory()
     const user=JSON.parse(localStorage.getItem("user"))
-    
+
     const renderList=()=>{
       if(user){
         return(
           [
-          <li><Link to="/profile">Profile</Link></li>,
-          <li><Link to="/create">Create Post</Link></li>,
-          <li><Link to="/signin">Signin</Link></li>
+            <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
+              <li key="2"><Link to="/profile">Profile</Link></li>,
+              <li key="3"><Link to="/create">Create Post</Link></li>,
+              <li key="4"><Link to="/myfollowingpost">My following Posts</Link></li>,
+              <li  key="5">
+               <button className="btn #c62828 red darken-3"
+              onClick={()=>{
+                localStorage.clear()
+                dispatch({type:"CLEAR"})
+                history.push('/signin')
+              }}
+              >
+                  Logout
+              </button>
+              </li>
         ])
       }
       else{
@@ -34,7 +46,7 @@ const NavBar=()=>{
         </ul>
       </div>
     </nav>
-            
+
     )
 }
 
